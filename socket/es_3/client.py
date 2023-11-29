@@ -4,7 +4,7 @@ import sys
 file = open(sys.argv[1])
 lettura = file.read()
 HOST = ""
-PORT = 5000
+PORT = 5006
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((HOST, PORT))
 carattere = input("inserisci il carattere da ricercare nel testo ")

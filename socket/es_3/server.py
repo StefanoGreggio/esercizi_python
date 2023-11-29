@@ -4,25 +4,28 @@ import socket
 
 def ContaCaratteri(stringa, carattere):
     conta = 0
-    i = 0
-    while i < len(stringa):
-        if stringa[i] == carattere:
+    n = 0
+    for i in range(len(stringa)):
+        if stringa[n] == carattere:
             conta = conta + 1
+        n = n + 1
     return conta
 
 
 HOST = ""
-PORT = 5000
+PORT = 5006
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind((HOST, PORT))
 s.listen(6)
 while 1:
-    conn, addr = s.accept()
+    conta = 0
+    conn = s.accept()
     stringa = conn.recv(1024).decode()
-    print("Client", addr, "::. \t" + stringa)
+    print(stringa)
     carattere = conn.recv(1).decode()
+    print(carattere)
     conta = ContaCaratteri(stringa, carattere)
     print(conta)
-    conn.send(conta.encode())
+    conn.send(conta)
 
 s.close()
