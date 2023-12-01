@@ -1,31 +1,31 @@
 # conta caratteri
 import socket
+import sys
 
 
 def ContaCaratteri(stringa, carattere):
     conta = 0
-    n = 0
-    for i in range(len(stringa)):
-        if stringa[n] == carattere:
+    for i in stringa:
+        if i == carattere:
             conta = conta + 1
-        n = n + 1
     return conta
 
 
 HOST = ""
-PORT = 5006
+PORT = int(sys.argv[1])
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind((HOST, PORT))
 s.listen(6)
 while 1:
     conta = 0
-    conn = s.accept()
+    conn, addr = s.accept()
     stringa = conn.recv(1024).decode()
-    print(stringa)
+    print("stringa ricevuta: " + stringa + "\n")
+    conn.send(stringa.encode())
     carattere = conn.recv(1).decode()
-    print(carattere)
+    print("carattere ricevuto: " + carattere)
     conta = ContaCaratteri(stringa, carattere)
     print(conta)
-    conn.send(conta)
-
+    conn.send(str(conta).encode())
+    conn.close()
 s.close()
