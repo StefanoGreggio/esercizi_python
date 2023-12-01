@@ -11,6 +11,10 @@ def ContaCaratteri(stringa, carattere):
     return conta
 
 
+if len(sys.argv) < 2:
+    print("errore negli argomenti. argomenti: <porta>")
+    exit()
+
 HOST = ""
 PORT = int(sys.argv[1])
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

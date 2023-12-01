@@ -1,5 +1,6 @@
 # inverti stringa
 import socket
+import sys
 
 
 def inverti(data, data2):
@@ -11,8 +12,12 @@ def inverti(data, data2):
     return data2
 
 
+if len(sys.argv) < 2:
+    print("errore negli argomenti. argomenti: <porta>")
+    exit()
+
 HOST = ""
-PORT = 5009
+PORT = sys.argv[1]
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind((HOST, PORT))
 s.listen(6)
