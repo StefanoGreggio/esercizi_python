@@ -15,8 +15,8 @@ s.listen(10)
 while 1:
     conn, addr = s.accept()
     print("\nRicevuta connessione da: ", addr)
-    pid=os.fork()
-    if pid==0:
+    pid = os.fork()
+    if pid == 0:
         stringa_json = conn.recv(1024).decode()
 
         json_object = json.loads(stringa_json)
@@ -28,5 +28,6 @@ while 1:
 
         conn.send(stringa.encode())
         conn.close()
-
+        sys.exit()
+    conn.close()
 s.close()
